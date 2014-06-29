@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1174</width>
+    <width>1913</width>
     <height>823</height>
    </rect>
   </property>
@@ -183,6 +183,20 @@
      </widget>
     </item>
     <item>
+     <widget class="QLabel" name="label">
+      <property name="text">
+       <string>URL Live Timing</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="LiveEdit">
+      <property name="text">
+       <string>http://www.apex-timing.com/live-timing/lemans-karting/index.html</string>
+      </property>
+     </widget>
+    </item>
+    <item>
      <widget class="QScrollArea" name="WebFrame">
       <property name="minimumSize">
        <size>
@@ -218,7 +232,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1174</width>
+     <width>1913</width>
      <height>25</height>
     </rect>
    </property>

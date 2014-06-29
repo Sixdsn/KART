@@ -1,8 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-#include <QWebView>
-#include <QTimer>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -11,15 +9,18 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     _time_race = ui->timeRaceEdit->time();
     _time_pilot = ui->timePilotEdit->time();
-    QWebView *view = new QWebView(ui->WebFrame);
-    view->load(QUrl("http://google.com/"));
-    view->resize(ui->WebFrame->size());
-    view->showMaximized();
+    _view = new QWebView(ui->WebFrame);
+    _view->load(QUrl(ui->LiveEdit->text()));
+    _view->resize(ui->WebFrame->size());
+    _view->showMaximized();
+    _timer = new QTimer(this);
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+    delete _view;
+    delete _timer;
 }
 
 void MainWindow::showtime()
@@ -45,9 +46,9 @@ void MainWindow::on_pushPilot_clicked()
 
 void MainWindow::on_pushStart_clicked()
 {
-    QTimer *timer = new QTimer(this);
-    connect(timer, SIGNAL(timeout()), this, SLOT(showtime()));
-    timer->start(1000);
+
+    connect(_timer, SIGNAL(timeout()), this, SLOT(showtime()));
+    _timer->start(1000);
     on_pushRace_clicked();
     on_pushPilot_clicked();
 }
@@ -55,4 +56,10 @@ void MainWindow::on_pushStart_clicked()
 void MainWindow::on_action_Exit_triggered()
 {
     QApplication::quit();
+}
+
+void MainWindow::on_LiveEdit_editingFinished()
+{
+    _view->load(QUrl(ui->LiveEdit->text()));
+    _view->resize(ui->WebFrame->size());
 }

@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 #include <QTime>
+#include <QWebView>
+#include <QTimer>
 
 namespace Ui {
 class MainWindow;
@@ -28,10 +30,14 @@ private slots:
 
     void on_action_Exit_triggered();
 
+    void on_LiveEdit_editingFinished();
+
 private:
     QTime _time_race;
     QTime _time_pilot;
     Ui::MainWindow *ui;
+    QWebView *_view;
+    QTimer *_timer;
 };
 
 #endif // MAINWINDOW_H
