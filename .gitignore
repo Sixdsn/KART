@@ -22,3 +22,6 @@
 
 # Qt build dir
 build-*
+KART
+Makefile
+moc_mainwindow.cpp

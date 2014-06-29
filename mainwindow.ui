@@ -6,224 +6,205 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1913</width>
-    <height>823</height>
+    <width>791</width>
+    <height>811</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <layout class="QVBoxLayout" name="verticalLayout">
-    <item>
-     <widget class="QSplitter" name="splitter">
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-      <widget class="QWidget" name="layoutWidget">
-       <layout class="QGridLayout" name="gridLayout">
-        <item row="1" column="0">
-         <widget class="QPushButton" name="pushStart">
-          <property name="text">
-           <string>Start Race</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="0">
-         <layout class="QHBoxLayout" name="horizontalLayout_4">
-          <item>
-           <widget class="QGroupBox" name="groupBox">
-            <property name="layoutDirection">
-             <enum>Qt::LeftToRight</enum>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QGroupBox" name="groupBox">
+        <property name="layoutDirection">
+         <enum>Qt::LeftToRight</enum>
+        </property>
+        <property name="autoFillBackground">
+         <bool>true</bool>
+        </property>
+        <property name="title">
+         <string>Race Remaining Time</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_2">
+         <item>
+          <widget class="QPushButton" name="pushRace">
+           <property name="text">
+            <string>Set Race Time</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QTimeEdit" name="timeRaceEdit">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="layoutDirection">
+            <enum>Qt::LeftToRight</enum>
+           </property>
+           <property name="autoFillBackground">
+            <bool>false</bool>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+           <property name="displayFormat">
+            <string>HH:mm:ss</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLCDNumber" name="lcdRace">
+           <property name="minimumSize">
+            <size>
+             <width>351</width>
+             <height>177</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true"/>
+           </property>
+           <property name="inputMethodHints">
+            <set>Qt::ImhTime</set>
+           </property>
+           <property name="frameShape">
+            <enum>QFrame::Box</enum>
+           </property>
+           <property name="lineWidth">
+            <number>1</number>
+           </property>
+           <property name="digitCount">
+            <number>8</number>
+           </property>
+           <property name="value" stdset="0">
+            <double>0.000000000000000</double>
+           </property>
+           <property name="intValue" stdset="0">
+            <number>0</number>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QGroupBox" name="groupBox_2">
+        <property name="layoutDirection">
+         <enum>Qt::LeftToRight</enum>
+        </property>
+        <property name="autoFillBackground">
+         <bool>true</bool>
+        </property>
+        <property name="title">
+         <string>Pilot Remaining Time</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout">
+         <item>
+          <widget class="QPushButton" name="pushPilot">
+           <property name="text">
+            <string>Set Pilot Time</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QTimeEdit" name="timePilotEdit">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="layoutDirection">
+            <enum>Qt::LeftToRight</enum>
+           </property>
+           <property name="autoFillBackground">
+            <bool>false</bool>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+           <property name="displayFormat">
+            <string>HH:mm:ss</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLCDNumber" name="lcdPilot">
+           <property name="minimumSize">
+            <size>
+             <width>350</width>
+             <height>177</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true"/>
+           </property>
+           <property name="inputMethodHints">
+            <set>Qt::ImhTime</set>
+           </property>
+           <property name="digitCount">
+            <number>8</number>
+           </property>
+           <property name="value" stdset="0">
+            <double>0.000000000000000</double>
+           </property>
+           <property name="intValue" stdset="0">
+            <number>0</number>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="1" column="0">
+     <layout class="QVBoxLayout" name="verticalLayout_4">
+      <item>
+       <widget class="QGroupBox" name="groupBox_3">
+        <property name="minimumSize">
+         <size>
+          <width>759</width>
+          <height>396</height>
+         </size>
+        </property>
+        <property name="title">
+         <string>URL Live Timing</string>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_3">
+         <item>
+          <widget class="QLineEdit" name="LiveEdit">
+           <property name="text">
+            <string>http://www.apex-timing.com/live-timing/lemans-karting/index.html</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QScrollArea" name="WebFrame">
+           <property name="widgetResizable">
+            <bool>true</bool>
+           </property>
+           <widget class="QWidget" name="scrollAreaWidgetContents">
+            <property name="geometry">
+             <rect>
+              <x>0</x>
+              <y>0</y>
+              <width>743</width>
+              <height>373</height>
+             </rect>
             </property>
-            <property name="autoFillBackground">
-             <bool>true</bool>
-            </property>
-            <property name="title">
-             <string>Race Remaining Time</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-            <layout class="QHBoxLayout" name="horizontalLayout_3">
-             <item>
-              <layout class="QGridLayout" name="gridLayout_3">
-               <property name="sizeConstraint">
-                <enum>QLayout::SetMaximumSize</enum>
-               </property>
-               <item row="0" column="0">
-                <layout class="QHBoxLayout" name="horizontalLayout_2">
-                 <item>
-                  <widget class="QTimeEdit" name="timeRaceEdit">
-                   <property name="enabled">
-                    <bool>true</bool>
-                   </property>
-                   <property name="layoutDirection">
-                    <enum>Qt::LeftToRight</enum>
-                   </property>
-                   <property name="autoFillBackground">
-                    <bool>false</bool>
-                   </property>
-                   <property name="alignment">
-                    <set>Qt::AlignCenter</set>
-                   </property>
-                   <property name="displayFormat">
-                    <string>HH:mm:ss</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QPushButton" name="pushRace">
-                   <property name="text">
-                    <string>Set Race Time</string>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </item>
-               <item row="1" column="0">
-                <widget class="QLCDNumber" name="lcdRace">
-                 <property name="styleSheet">
-                  <string notr="true"/>
-                 </property>
-                 <property name="inputMethodHints">
-                  <set>Qt::ImhTime</set>
-                 </property>
-                 <property name="digitCount">
-                  <number>8</number>
-                 </property>
-                 <property name="value" stdset="0">
-                  <double>0.000000000000000</double>
-                 </property>
-                 <property name="intValue" stdset="0">
-                  <number>0</number>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-            </layout>
            </widget>
-          </item>
-          <item>
-           <widget class="QGroupBox" name="groupBox_2">
-            <property name="layoutDirection">
-             <enum>Qt::LeftToRight</enum>
-            </property>
-            <property name="autoFillBackground">
-             <bool>true</bool>
-            </property>
-            <property name="title">
-             <string>Pilot Remaining Time</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-            <layout class="QVBoxLayout" name="verticalLayout_2">
-             <item>
-              <layout class="QGridLayout" name="gridLayout_4">
-               <item row="0" column="0">
-                <layout class="QHBoxLayout" name="horizontalLayout">
-                 <item>
-                  <widget class="QTimeEdit" name="timePilotEdit">
-                   <property name="enabled">
-                    <bool>true</bool>
-                   </property>
-                   <property name="layoutDirection">
-                    <enum>Qt::LeftToRight</enum>
-                   </property>
-                   <property name="autoFillBackground">
-                    <bool>false</bool>
-                   </property>
-                   <property name="alignment">
-                    <set>Qt::AlignCenter</set>
-                   </property>
-                   <property name="displayFormat">
-                    <string>HH:mm:ss</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QPushButton" name="pushPilot">
-                   <property name="text">
-                    <string>Set Pilot Time</string>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </item>
-               <item row="1" column="0">
-                <widget class="QLCDNumber" name="lcdPilot">
-                 <property name="styleSheet">
-                  <string notr="true"/>
-                 </property>
-                 <property name="inputMethodHints">
-                  <set>Qt::ImhTime</set>
-                 </property>
-                 <property name="digitCount">
-                  <number>8</number>
-                 </property>
-                 <property name="value" stdset="0">
-                  <double>0.000000000000000</double>
-                 </property>
-                 <property name="intValue" stdset="0">
-                  <number>0</number>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-            </layout>
-           </widget>
-          </item>
-         </layout>
-        </item>
-       </layout>
-      </widget>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLabel" name="label">
-      <property name="text">
-       <string>URL Live Timing</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLineEdit" name="LiveEdit">
-      <property name="text">
-       <string>http://www.apex-timing.com/live-timing/lemans-karting/index.html</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QScrollArea" name="WebFrame">
-      <property name="minimumSize">
-       <size>
-        <width>1895</width>
-        <height>600</height>
-       </size>
-      </property>
-      <property name="layoutDirection">
-       <enum>Qt::LeftToRight</enum>
-      </property>
-      <property name="frameShape">
-       <enum>QFrame::WinPanel</enum>
-      </property>
-      <property name="widgetResizable">
-       <bool>true</bool>
-      </property>
-      <widget class="QWidget" name="scrollAreaWidgetContents">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>0</y>
-         <width>1891</width>
-         <height>596</height>
-        </rect>
-       </property>
-      </widget>
-     </widget>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+     </layout>
     </item>
    </layout>
   </widget>
@@ -232,7 +213,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1913</width>
+     <width>791</width>
      <height>25</height>
     </rect>
    </property>
@@ -241,6 +222,7 @@
      <string>KART</string>
     </property>
     <addaction name="separator"/>
+    <addaction name="actionStart_Race"/>
     <addaction name="action_Exit"/>
    </widget>
    <addaction name="menuKART"/>
@@ -269,12 +251,16 @@
     <string>Exit</string>
    </property>
   </action>
+  <action name="actionStart_Race">
+   <property name="text">
+    <string>Start Race</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <tabstops>
   <tabstop>timeRaceEdit</tabstop>
   <tabstop>pushRace</tabstop>
-  <tabstop>pushStart</tabstop>
   <tabstop>timePilotEdit</tabstop>
   <tabstop>pushPilot</tabstop>
  </tabstops>

@@ -30,6 +30,8 @@ private slots:
 
     void on_action_Exit_triggered();
 
+    void on_actionStart_Race_triggered();
+
     void on_LiveEdit_editingFinished();
 
 private:
