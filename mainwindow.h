@@ -6,6 +6,8 @@
 #include <QWebView>
 #include <QTimer>
 
+#include "launchrace.h"
+
 namespace Ui {
 class MainWindow;
 }
@@ -41,6 +43,7 @@ private:
     Ui::MainWindow *ui;
     QWebView *_view;
     QTimer *_timer;
+    LaunchRace *_valid_race;
 };
 
 #endif // MAINWINDOW_H

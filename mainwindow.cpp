@@ -1,7 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -15,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent) :
     _view->resize(ui->WebFrame->size());
     _view->showMaximized();
     _timer = new QTimer(this);
+    _valid_race = new LaunchRace(this);
 }
 
 MainWindow::~MainWindow()
@@ -22,6 +22,7 @@ MainWindow::~MainWindow()
     delete ui;
     delete _view;
     delete _timer;
+    delete _valid_race;
 }
 
 void MainWindow::showtime()
@@ -59,11 +60,15 @@ void MainWindow::on_action_Exit_triggered()
 
 void MainWindow::on_actionStart_Race_triggered()
 {
-    connect(_timer, SIGNAL(timeout()), this, SLOT(showtime()));
-    _timer->start(1000);
-    on_pushRace_clicked();
-    on_pushPilot_clicked();
-    on_pushFuel_clicked();
+    _valid_race->show();
+    if( _valid_race->exec() == QDialog::Accepted )
+    {
+        connect(_timer, SIGNAL(timeout()), this, SLOT(showtime()));
+        _timer->start(1000);
+        on_pushRace_clicked();
+        on_pushPilot_clicked();
+        on_pushFuel_clicked();
+    }
 }
 
 void MainWindow::on_LiveEdit_editingFinished()
