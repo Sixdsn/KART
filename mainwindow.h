@@ -26,6 +26,8 @@ private slots:
 
     void on_pushPilot_clicked();
 
+    void on_pushFuel_clicked();
+
     void on_action_Exit_triggered();
 
     void on_actionStart_Race_triggered();
@@ -35,6 +37,7 @@ private slots:
 private:
     QTime _time_race;
     QTime _time_pilot;
+    QTime _time_fuel;
     Ui::MainWindow *ui;
     QWebView *_view;
     QTimer *_timer;

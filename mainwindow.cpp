@@ -9,6 +9,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     _time_race = ui->timeRaceEdit->time();
     _time_pilot = ui->timePilotEdit->time();
+    _time_fuel = ui->timeFuelEdit->time();
     _view = new QWebView(ui->WebFrame);
     _view->load(QUrl(ui->LiveEdit->text()));
     _view->resize(ui->WebFrame->size());
@@ -27,9 +28,10 @@ void MainWindow::showtime()
 {
     _time_race = _time_race.addSecs(-1);
     ui->lcdRace->display(_time_race.toString("hh:mm:ss"));
-
     _time_pilot = _time_pilot.addSecs(-1);
     ui->lcdPilot->display(_time_pilot.toString("hh:mm:ss"));
+    _time_fuel = _time_fuel.addSecs(-1);
+    ui->lcdFuel->display(_time_fuel.toString("hh:mm:ss"));
 }
 
 void MainWindow::on_pushRace_clicked()
@@ -44,6 +46,12 @@ void MainWindow::on_pushPilot_clicked()
     ui->lcdPilot->display(_time_pilot.toString("hh:mm:ss"));
 }
 
+void MainWindow::on_pushFuel_clicked()
+{
+    _time_fuel = ui->timeFuelEdit->time();
+    ui->lcdFuel->display(_time_fuel.toString("hh:mm:ss"));
+}
+
 void MainWindow::on_action_Exit_triggered()
 {
     QApplication::quit();
@@ -55,6 +63,7 @@ void MainWindow::on_actionStart_Race_triggered()
     _timer->start(1000);
     on_pushRace_clicked();
     on_pushPilot_clicked();
+    on_pushFuel_clicked();
 }
 
 void MainWindow::on_LiveEdit_editingFinished()
