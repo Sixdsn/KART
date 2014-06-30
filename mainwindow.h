@@ -26,8 +26,6 @@ private slots:
 
     void on_pushPilot_clicked();
 
-    void on_pushStart_clicked();
-
     void on_action_Exit_triggered();
 
     void on_actionStart_Race_triggered();

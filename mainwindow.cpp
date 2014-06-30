@@ -44,14 +44,6 @@ void MainWindow::on_pushPilot_clicked()
     ui->lcdPilot->display(_time_pilot.toString("hh:mm:ss"));
 }
 
-void MainWindow::on_pushStart_clicked()
-{
-    connect(_timer, SIGNAL(timeout()), this, SLOT(showtime()));
-    _timer->start(1000);
-    on_pushRace_clicked();
-    on_pushPilot_clicked();
-}
-
 void MainWindow::on_action_Exit_triggered()
 {
     QApplication::quit();
@@ -59,7 +51,10 @@ void MainWindow::on_action_Exit_triggered()
 
 void MainWindow::on_actionStart_Race_triggered()
 {
-    on_pushStart_clicked();
+    connect(_timer, SIGNAL(timeout()), this, SLOT(showtime()));
+    _timer->start(1000);
+    on_pushRace_clicked();
+    on_pushPilot_clicked();
 }
 
 void MainWindow::on_LiveEdit_editingFinished()
