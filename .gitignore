@@ -24,4 +24,5 @@
 build-*
 KART
 Makefile
-moc_mainwindow.cpp
+moc_*.cpp
+KART.pro.*

@@ -5,6 +5,7 @@
 #include <QTime>
 #include <QWebView>
 #include <QTimer>
+#include <QResizeEvent>
 
 #include "launchrace.h"
 
@@ -19,6 +20,7 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+    void resizeEvent(QResizeEvent *event);
 
 private slots:
 
@@ -36,12 +38,15 @@ private slots:
 
     void on_LiveEdit_editingFinished();
 
+    void on_StrategyEdit_editingFinished();
+
 private:
     QTime _time_race;
     QTime _time_pilot;
     QTime _time_fuel;
     Ui::MainWindow *ui;
-    QWebView *_view;
+    QWebView *_viewLive;
+    QWebView *_viewStrategy;
     QTimer *_timer;
     LaunchRace *_valid_race;
 };
