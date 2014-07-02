@@ -44,6 +44,9 @@ private:
     QTime _time_race;
     QTime _time_pilot;
     QTime _time_fuel;
+    int _orig_race;
+    int _orig_pilot;
+    int _orig_fuel;
     Ui::MainWindow *ui;
     QWebView *_viewLive;
     QWebView *_viewStrategy;
