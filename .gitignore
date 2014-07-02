@@ -26,3 +26,4 @@ KART
 Makefile
 moc_*.cpp
 KART.pro.*
+ui_*.h
