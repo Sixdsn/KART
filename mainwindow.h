@@ -10,6 +10,8 @@
 
 #include "launchrace.h"
 
+#define ALERT_SOUND "./assets/alert.wav"
+
 namespace Ui {
 class MainWindow;
 }

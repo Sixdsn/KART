@@ -67,7 +67,7 @@ void MainWindow::showtime()
     {
         if (!played_pilot_alert)
         {
-            QSound::play("/home/six/alert.wav");
+            QSound::play(ALERT_SOUND);
             played_pilot_alert = true;
         }
         ui->lcdPilot->setPalette(_alertPal);
@@ -78,7 +78,7 @@ void MainWindow::showtime()
     {
         if (!played_fuel_alert)
         {
-            QSound::play("/home/six/alert.wav");
+            QSound::play(ALERT_SOUND);
             played_fuel_alert = true;
         }
         ui->lcdFuel->setPalette(_alertPal);
@@ -130,11 +130,11 @@ void MainWindow::on_actionStart_Race_triggered()
 void MainWindow::on_LiveEdit_editingFinished()
 {
     _viewLive->load(QUrl(ui->LiveEdit->text()));
-    _viewLive->resize(ui->WebFrameStrategy->size());
+    _viewLive->showMaximized();
 }
 
 void MainWindow::on_StrategyEdit_editingFinished()
 {
     _viewStrategy->load(QUrl(ui->StrategyEdit->text()));
-    _viewStrategy->resize(ui->WebFrameStrategy->size());
+    _viewStrategy->showMaximized();
 }

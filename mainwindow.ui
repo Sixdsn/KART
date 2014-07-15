@@ -18,7 +18,7 @@
     <item row="0" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="Live">
        <attribute name="title">
@@ -73,7 +73,7 @@
              <item>
               <widget class="QProgressBar" name="progressBarPilot">
                <property name="value">
-                <number>24</number>
+                <number>100</number>
                </property>
               </widget>
              </item>
@@ -126,7 +126,7 @@
              <item>
               <widget class="QProgressBar" name="progressBarFuel">
                <property name="value">
-                <number>24</number>
+                <number>100</number>
                </property>
               </widget>
              </item>
@@ -228,6 +228,13 @@
                <property name="displayFormat">
                 <string>HH:mm:ss</string>
                </property>
+               <property name="time">
+                <time>
+                 <hour>0</hour>
+                 <minute>1</minute>
+                 <second>45</second>
+                </time>
+               </property>
               </widget>
              </item>
              <item>
@@ -306,6 +313,13 @@
                <property name="displayFormat">
                 <string>HH:mm:ss</string>
                </property>
+               <property name="time">
+                <time>
+                 <hour>0</hour>
+                 <minute>45</minute>
+                 <second>0</second>
+                </time>
+               </property>
               </widget>
              </item>
              <item>
@@ -378,6 +392,13 @@
                <property name="displayFormat">
                 <string>HH:mm:ss</string>
                </property>
+               <property name="time">
+                <time>
+                 <hour>2</hour>
+                 <minute>20</minute>
+                 <second>0</second>
+                </time>
+               </property>
               </widget>
              </item>
              <item>
@@ -449,8 +470,8 @@
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>1115</width>
-                <height>646</height>
+                <width>731</width>
+                <height>325</height>
                </rect>
               </property>
              </widget>
