@@ -6,6 +6,7 @@
 #include <QWebView>
 #include <QTimer>
 #include <QResizeEvent>
+#include <QSound>
 
 #include "launchrace.h"
 
@@ -26,8 +27,6 @@ private slots:
 
     void showtime();
 
-    void on_pushRace_clicked();
-
     void on_pushPilot_clicked();
 
     void on_pushFuel_clicked();
@@ -40,13 +39,16 @@ private slots:
 
     void on_StrategyEdit_editingFinished();
 
+    void on_pushLap_clicked();
+
 private:
-    QTime _time_race;
     QTime _time_pilot;
     QTime _time_fuel;
-    int _orig_race;
+    QTime _time_lap;
     int _orig_pilot;
     int _orig_fuel;
+    QPalette _origPal;
+    QPalette _alertPal;
     Ui::MainWindow *ui;
     QWebView *_viewLive;
     QWebView *_viewStrategy;

@@ -6,7 +6,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    _time_race = ui->timeRaceEdit->time();
+    _time_lap = ui->timeLapEdit->time();
     _time_pilot = ui->timePilotEdit->time();
     _time_fuel = ui->timeFuelEdit->time();
     _viewLive = new QWebView(ui->WebFrameLive);
@@ -20,6 +20,10 @@ MainWindow::MainWindow(QWidget *parent) :
     _timer = new QTimer(this);
     connect(_timer, SIGNAL(timeout()), this, SLOT(showtime()));
     _valid_race = new LaunchRace(this);
+    _origPal = ui->lcdPilot->palette();
+    _alertPal = _origPal;
+    _alertPal.setColor(QPalette::Normal, QPalette::WindowText, Qt::green);
+    _alertPal.setColor(QPalette::Normal, QPalette::Window, Qt::black);
 }
 
 MainWindow::~MainWindow()
@@ -39,32 +43,54 @@ void MainWindow::resizeEvent(QResizeEvent *event)
 
 void MainWindow::showtime()
 {
-    int rest_race = _time_race.second() + (_time_race.minute() * 60) + (_time_race.hour() * 60 * 60);
+    static bool played_pilot_alert = false;
+    static bool played_fuel_alert = false;
+
+    int laptime = _time_lap.second() + (_time_lap.minute() * 60) + (_time_lap.hour() * 60 * 60);
+    laptime *= 3;
+
     int rest_pilot = _time_pilot.second() + (_time_pilot.minute() * 60) + (_time_pilot.hour() * 60 * 60);
     int rest_fuel = _time_fuel.second() + (_time_fuel.minute() * 60) + (_time_fuel.hour() * 60 * 60);
 
-    int race_perc =  (float)((float)rest_race / (float)_orig_race) * 100;
     int pilot_perc =  (float)((float)rest_pilot / (float)_orig_pilot) * 100;
     int fuel_perc =  (float)((float)rest_fuel / (float)_orig_fuel) * 100;
 
-    _time_race = _time_race.addSecs(-1);
-    ui->lcdRace->display(_time_race.toString("hh:mm:ss"));
     _time_pilot = _time_pilot.addSecs(-1);
     ui->lcdPilot->display(_time_pilot.toString("hh:mm:ss"));
     _time_fuel = _time_fuel.addSecs(-1);
     ui->lcdFuel->display(_time_fuel.toString("hh:mm:ss"));
 
-    ui->progressBarRace->setValue(race_perc);
     ui->progressBarPilot->setValue(pilot_perc);
     ui->progressBarFuel->setValue(fuel_perc);
+
+    if (rest_pilot <= laptime)
+    {
+        if (!played_pilot_alert)
+        {
+            QSound::play("/home/six/alert.wav");
+            played_pilot_alert = true;
+        }
+        ui->lcdPilot->setPalette(_alertPal);
+    }
+    else
+        played_pilot_alert = false;
+    if (rest_fuel <= laptime)
+    {
+        if (!played_fuel_alert)
+        {
+            QSound::play("/home/six/alert.wav");
+            played_fuel_alert = true;
+        }
+        ui->lcdFuel->setPalette(_alertPal);
+    }
+    else
+        played_fuel_alert = false;
 }
 
-void MainWindow::on_pushRace_clicked()
+void MainWindow::on_pushLap_clicked()
 {
-    _time_race = ui->timeRaceEdit->time();
-    _orig_race = _time_race.second() + (_time_race.minute() * 60) + (_time_race.hour() * 60 * 60);
-    ui->lcdRace->display(_time_race.toString("hh:mm:ss"));
-    ui->lcdRace_2->display(_time_race.toString("hh:mm:ss"));
+    _time_lap = ui->timeLapEdit->time();
+    ui->lcdLap_2->display(_time_lap.toString("hh:mm:ss"));
 }
 
 void MainWindow::on_pushPilot_clicked()
@@ -73,6 +99,7 @@ void MainWindow::on_pushPilot_clicked()
     _orig_pilot = _time_pilot.second() + (_time_pilot.minute() * 60) + (_time_pilot.hour() * 60 * 60);
     ui->lcdPilot->display(_time_pilot.toString("hh:mm:ss"));
     ui->lcdPilot_2->display(_time_pilot.toString("hh:mm:ss"));
+    ui->lcdPilot->setPalette(_origPal);
 }
 
 void MainWindow::on_pushFuel_clicked()
@@ -81,6 +108,7 @@ void MainWindow::on_pushFuel_clicked()
     _orig_fuel = _time_fuel.second() + (_time_fuel.minute() * 60) + (_time_fuel.hour() * 60 * 60);
     ui->lcdFuel->display(_time_fuel.toString("hh:mm:ss"));
     ui->lcdFuel_2->display(_time_fuel.toString("hh:mm:ss"));
+    ui->lcdFuel->setPalette(_origPal);
 }
 
 void MainWindow::on_action_Exit_triggered()
@@ -94,7 +122,6 @@ void MainWindow::on_actionStart_Race_triggered()
     if( _valid_race->exec() == QDialog::Accepted )
     {
         _timer->start(1000);
-        on_pushRace_clicked();
         on_pushPilot_clicked();
         on_pushFuel_clicked();
     }
