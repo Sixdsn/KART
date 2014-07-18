@@ -1,6 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+#include <QDebug>
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -152,4 +154,17 @@ void MainWindow::on_line2Edit_editingFinished()
 void MainWindow::on_line3Edit_editingFinished()
 {
     ui->labelLine3->setText(ui->line3Edit->text());
+}
+
+void MainWindow::on_PolicySlider_valueChanged(int value)
+{
+    QFont font;
+
+    font.setPointSize(value);
+    font.setBold(true);
+    font.setWeight(75);
+
+    ui->labelLine1->setFont(font);
+    ui->labelLine2->setFont(font);
+    ui->labelLine3->setFont(font);
 }

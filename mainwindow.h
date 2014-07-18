@@ -49,6 +49,8 @@ private slots:
 
     void on_line3Edit_editingFinished();
 
+    void on_PolicySlider_valueChanged(int value);
+
 private:
     QTime _time_pilot;
     QTime _time_fuel;
