@@ -43,6 +43,12 @@ private slots:
 
     void on_pushLap_clicked();
 
+    void on_line1Edit_editingFinished();
+
+    void on_line2Edit_editingFinished();
+
+    void on_line3Edit_editingFinished();
+
 private:
     QTime _time_pilot;
     QTime _time_fuel;

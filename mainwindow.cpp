@@ -138,3 +138,18 @@ void MainWindow::on_StrategyEdit_editingFinished()
     _viewStrategy->load(QUrl(ui->StrategyEdit->text()));
     _viewStrategy->showMaximized();
 }
+
+void MainWindow::on_line1Edit_editingFinished()
+{
+    ui->labelLine1->setText(ui->line1Edit->text());
+}
+
+void MainWindow::on_line2Edit_editingFinished()
+{
+    ui->labelLine2->setText(ui->line2Edit->text());
+}
+
+void MainWindow::on_line3Edit_editingFinished()
+{
+    ui->labelLine3->setText(ui->line3Edit->text());
+}
