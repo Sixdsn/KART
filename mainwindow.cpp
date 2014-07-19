@@ -168,3 +168,19 @@ void MainWindow::on_PolicySlider_valueChanged(int value)
     ui->labelLine2->setFont(font);
     ui->labelLine3->setFont(font);
 }
+
+void MainWindow::on_checkBoxLine2_clicked(bool checked)
+{
+    if (!checked)
+        ui->labelLine2->hide();
+    else
+        ui->labelLine2->showMaximized();
+}
+
+void MainWindow::on_checkBoxLine3_clicked(bool checked)
+{
+    if (!checked)
+        ui->labelLine3->hide();
+    else
+        ui->labelLine3->showMaximized();
+}

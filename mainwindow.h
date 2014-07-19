@@ -51,6 +51,10 @@ private slots:
 
     void on_PolicySlider_valueChanged(int value);
 
+    void on_checkBoxLine2_clicked(bool checked);
+
+    void on_checkBoxLine3_clicked(bool checked);
+
 private:
     QTime _time_pilot;
     QTime _time_fuel;
