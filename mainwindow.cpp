@@ -1,16 +1,14 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-#include <QDebug>
-
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    _time_lap = ui->timeLapEdit->time();
-    _time_pilot = ui->timePilotEdit->time();
-    _time_fuel = ui->timeFuelEdit->time();
+    _lap.init(ui->timeLapEdit->time());
+    _pilot.init(ui->timePilotEdit->time());
+    _fuel.init(ui->timeFuelEdit->time());
     _viewLive = new QWebView(ui->WebFrameLive);
     _viewLive->load(QUrl(ui->LiveEdit->text()));
     _viewLive->resize(ui->WebFrameLive->size());
@@ -45,72 +43,55 @@ void MainWindow::resizeEvent(QResizeEvent *event)
 
 void MainWindow::showtime()
 {
-    static bool played_pilot_alert = false;
-    static bool played_fuel_alert = false;
+    _pilot.dec(1);
+    _fuel.dec(1);
 
-    int laptime = _time_lap.second() + (_time_lap.minute() * 60) + (_time_lap.hour() * 60 * 60);
-    laptime *= 3;
+    ui->lcdPilot->display(_pilot.toStr());
+    ui->lcdFuel->display(_fuel.toStr());
 
-    int rest_pilot = _time_pilot.second() + (_time_pilot.minute() * 60) + (_time_pilot.hour() * 60 * 60);
-    int rest_fuel = _time_fuel.second() + (_time_fuel.minute() * 60) + (_time_fuel.hour() * 60 * 60);
+    ui->progressBarPilot->setValue(_pilot.getPerc());
+    ui->progressBarFuel->setValue(_fuel.getPerc());
 
-    int pilot_perc =  (float)((float)rest_pilot / (float)_orig_pilot) * 100;
-    int fuel_perc =  (float)((float)rest_fuel / (float)_orig_fuel) * 100;
-
-    _time_pilot = _time_pilot.addSecs(-1);
-    ui->lcdPilot->display(_time_pilot.toString("hh:mm:ss"));
-    _time_fuel = _time_fuel.addSecs(-1);
-    ui->lcdFuel->display(_time_fuel.toString("hh:mm:ss"));
-
-    ui->progressBarPilot->setValue(pilot_perc);
-    ui->progressBarFuel->setValue(fuel_perc);
-
-    if (rest_pilot <= laptime)
+    if (_pilot.getRest() <= _lap.getLimit())
     {
-        if (!played_pilot_alert)
+      if (!_pilot.getAlert())
         {
             QSound::play(ALERT_SOUND);
-            played_pilot_alert = true;
+            _pilot.setAlert();
         }
         ui->lcdPilot->setPalette(_alertPal);
     }
-    else
-        played_pilot_alert = false;
-    if (rest_fuel <= laptime)
+    if (_fuel.getRest() <= _lap.getLimit())
     {
-        if (!played_fuel_alert)
+      if (!_fuel.getAlert())
         {
             QSound::play(ALERT_SOUND);
-            played_fuel_alert = true;
+            _fuel.setAlert();
         }
         ui->lcdFuel->setPalette(_alertPal);
     }
-    else
-        played_fuel_alert = false;
 }
 
 void MainWindow::on_pushLap_clicked()
 {
-    _time_lap = ui->timeLapEdit->time();
-    ui->lcdLap_2->display(_time_lap.toString("hh:mm:ss"));
+  _lap.init(ui->timeLapEdit->time());
+  ui->lcdLap_2->display(_lap.toStr());
 }
 
 void MainWindow::on_pushPilot_clicked()
 {
-    _time_pilot = ui->timePilotEdit->time();
-    _orig_pilot = _time_pilot.second() + (_time_pilot.minute() * 60) + (_time_pilot.hour() * 60 * 60);
-    ui->lcdPilot->display(_time_pilot.toString("hh:mm:ss"));
-    ui->lcdPilot_2->display(_time_pilot.toString("hh:mm:ss"));
-    ui->lcdPilot->setPalette(_origPal);
+  _pilot.init(ui->timePilotEdit->time());
+  ui->lcdPilot->display(_pilot.toStr());
+  ui->lcdPilot_2->display(_pilot.toStr());
+  ui->lcdPilot->setPalette(_origPal);
 }
 
 void MainWindow::on_pushFuel_clicked()
 {
-    _time_fuel = ui->timeFuelEdit->time();
-    _orig_fuel = _time_fuel.second() + (_time_fuel.minute() * 60) + (_time_fuel.hour() * 60 * 60);
-    ui->lcdFuel->display(_time_fuel.toString("hh:mm:ss"));
-    ui->lcdFuel_2->display(_time_fuel.toString("hh:mm:ss"));
-    ui->lcdFuel->setPalette(_origPal);
+  _fuel.init(ui->timeFuelEdit->time());
+  ui->lcdFuel->display(_fuel.toStr());
+  ui->lcdFuel_2->display(_fuel.toStr());
+  ui->lcdFuel->setPalette(_origPal);
 }
 
 void MainWindow::on_action_Exit_triggered()

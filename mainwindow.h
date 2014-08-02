@@ -9,7 +9,7 @@
 #include <QSound>
 
 #include "launchrace.h"
-
+#include "sixtimer.h"
 #define ALERT_SOUND "./assets/alert.wav"
 
 namespace Ui {
@@ -28,39 +28,25 @@ public:
 private slots:
 
     void showtime();
-
     void on_pushPilot_clicked();
-
     void on_pushFuel_clicked();
-
     void on_action_Exit_triggered();
-
     void on_actionStart_Race_triggered();
-
     void on_LiveEdit_editingFinished();
-
     void on_StrategyEdit_editingFinished();
-
     void on_pushLap_clicked();
-
     void on_line1Edit_editingFinished();
-
     void on_line2Edit_editingFinished();
-
     void on_line3Edit_editingFinished();
-
     void on_PolicySlider_valueChanged(int value);
-
     void on_checkBoxLine2_clicked(bool checked);
-
     void on_checkBoxLine3_clicked(bool checked);
 
 private:
-    QTime _time_pilot;
-    QTime _time_fuel;
-    QTime _time_lap;
-    int _orig_pilot;
-    int _orig_fuel;
+    SixTimer _pilot;
+    SixTimer _fuel;
+    SixTimer _lap;
+
     QPalette _origPal;
     QPalette _alertPal;
     Ui::MainWindow *ui;
