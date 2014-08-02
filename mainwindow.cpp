@@ -19,7 +19,6 @@ MainWindow::MainWindow(QWidget *parent) :
     _viewStrategy->showMaximized();
     _timer = new QTimer(this);
     connect(_timer, SIGNAL(timeout()), this, SLOT(showtime()));
-    _valid_race = new LaunchRace(this);
     _origPal = ui->lcdPilot->palette();
     _alertPal = _origPal;
     _alertPal.setColor(QPalette::Normal, QPalette::WindowText, Qt::green);
@@ -32,7 +31,6 @@ MainWindow::~MainWindow()
     delete _viewLive;
     delete _viewStrategy;
     delete _timer;
-    delete _valid_race;
 }
 
 void MainWindow::resizeEvent(QResizeEvent *event)
@@ -101,12 +99,14 @@ void MainWindow::on_action_Exit_triggered()
 
 void MainWindow::on_actionStart_Race_triggered()
 {
-    _valid_race->show();
-    if( _valid_race->exec() == QDialog::Accepted )
+  LaunchRace valid_race(this);
+
+  valid_race.show();
+  if(valid_race.exec() == QDialog::Accepted)
     {
-        _timer->start(1000);
-        on_pushPilot_clicked();
-        on_pushFuel_clicked();
+      _timer->start(1000);
+      on_pushPilot_clicked();
+      on_pushFuel_clicked();
     }
 }
 

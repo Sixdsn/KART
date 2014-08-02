@@ -53,7 +53,6 @@ private:
     QWebView *_viewLive;
     QWebView *_viewStrategy;
     QTimer *_timer;
-    LaunchRace *_valid_race;
 };
 
 #endif // MAINWINDOW_H
