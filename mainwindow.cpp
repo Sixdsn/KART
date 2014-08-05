@@ -5,22 +5,24 @@
 
 MainWindow::MainWindow(QWidget *parent) :
   QMainWindow(parent),
-  ui(new Ui::MainWindow)
+  ui(new Ui::MainWindow),
+  _viewLive(),
+  _viewStrategy(),
+  _timer(this)
 {
   ui->setupUi(this);
   _lap.init(ui->timeLapEdit->time());
   _pilot.init(ui->timePilotEdit->time());
   _fuel.init(ui->timeFuelEdit->time());
-  _viewLive = new QWebView(ui->WebFrameLive);
-  _viewLive->load(QUrl(ui->LiveEdit->text()));
-  _viewLive->resize(ui->WebFrameLive->size());
-  _viewLive->showMaximized();
-  _viewStrategy = new QWebView(ui->WebFrameStrategy);
-  _viewStrategy->load(QUrl(ui->LiveEdit->text()));
-  _viewStrategy->resize(ui->WebFrameStrategy->size());
-  _viewStrategy->showMaximized();
-  _timer = new QTimer(this);
-  connect(_timer, SIGNAL(timeout()), this, SLOT(showtime()));
+  _viewLive.setParent(ui->WebFrameLive);
+  _viewLive.load(QUrl(ui->LiveEdit->text()));
+  _viewLive.resize(ui->WebFrameLive->size());
+  _viewLive.showMaximized();
+  _viewStrategy.setParent(ui->WebFrameStrategy);
+  _viewStrategy.load(QUrl(ui->LiveEdit->text()));
+  _viewStrategy.resize(ui->WebFrameStrategy->size());
+  _viewStrategy.showMaximized();
+  connect(&_timer, SIGNAL(timeout()), this, SLOT(showtime()));
   _origPal = ui->lcdPilot->palette();
   _alertPal = _origPal;
   _alertPal.setColor(QPalette::Normal, QPalette::WindowText, Qt::green);
@@ -30,15 +32,12 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
   delete ui;
-  delete _viewLive;
-  delete _viewStrategy;
-  delete _timer;
 }
 
 void MainWindow::resizeEvent(QResizeEvent *event)
 {
-  _viewLive->resize(event->size());
-  _viewStrategy->resize(event->size());
+  _viewLive.resize(event->size());
+  _viewStrategy.resize(event->size());
 }
 
 void MainWindow::showtime()
@@ -96,7 +95,7 @@ void MainWindow::on_pushFuel_clicked()
 
 void MainWindow::on_action_Exit_triggered()
 {
-  ui->close();
+  this->close();
 }
 
 void MainWindow::on_actionStart_Race_triggered()
@@ -106,7 +105,7 @@ void MainWindow::on_actionStart_Race_triggered()
   valid_race.show();
   if (valid_race.exec() == QDialog::Accepted)
     {
-      _timer->start(1000);
+      _timer.start(1000);
       on_pushPilot_clicked();
       on_pushFuel_clicked();
     }
@@ -114,14 +113,14 @@ void MainWindow::on_actionStart_Race_triggered()
 
 void MainWindow::on_LiveEdit_editingFinished()
 {
-  _viewLive->load(QUrl(ui->LiveEdit->text()));
-  _viewLive->showMaximized();
+  _viewLive.load(QUrl(ui->LiveEdit->text()));
+  _viewLive.showMaximized();
 }
 
 void MainWindow::on_StrategyEdit_editingFinished()
 {
-  _viewStrategy->load(QUrl(ui->StrategyEdit->text()));
-  _viewStrategy->showMaximized();
+  _viewStrategy.load(QUrl(ui->StrategyEdit->text()));
+  _viewStrategy.showMaximized();
 }
 
 void MainWindow::on_line1Edit_editingFinished()

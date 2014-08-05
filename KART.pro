@@ -16,10 +16,16 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-        launchrace.cpp
+        launchrace.cpp \
+        ASixTimer.cpp \
+        sixTimer.cpp \
+        sixLapTimer.cpp
 
 HEADERS  += mainwindow.h \
-            launchrace.h
+            launchrace.h \
+            ASixTimer.h \
+            sixTimer.h \
+            sixLapTimer.h
 
 FORMS    += mainwindow.ui \
             launchrace.ui

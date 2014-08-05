@@ -11,7 +11,9 @@
 #include <QSound>
 
 #include "launchrace.h"
-#include "sixtimer.h"
+#include "sixTimer.h"
+#include "sixLapTimer.h"
+
 #define ALERT_SOUND "./assets/alert.wav"
 
 namespace Ui {
@@ -44,15 +46,15 @@ private slots:
   void on_checkBoxLine3_clicked(bool checked);
 
 private:
-  SixTimer _pilot;
-  SixTimer _fuel;
-  SixTimer _lap;
-  QPalette _origPal;
-  QPalette _alertPal;
+  sixTimer      _pilot;
+  sixTimer      _fuel;
+  sixLapTimer   _lap;
+  QPalette      _origPal;
+  QPalette      _alertPal;
   Ui::MainWindow *ui;
-  QWebView *_viewLive;
-  QWebView *_viewStrategy;
-  QTimer *_timer;
+  QWebView      _viewLive;
+  QWebView      _viewStrategy;
+  QTimer        _timer;
 };
 
 #endif // MAINWINDOW_H
