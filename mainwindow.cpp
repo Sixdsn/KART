@@ -106,6 +106,7 @@ void MainWindow::on_actionStart_Race_triggered()
   if (valid_race.exec() == QDialog::Accepted)
     {
       _timer.start(1000);
+      on_pushLap_clicked();
       on_pushPilot_clicked();
       on_pushFuel_clicked();
     }
